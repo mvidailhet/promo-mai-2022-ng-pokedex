@@ -18,4 +18,12 @@ export class PokemonListComponent implements OnInit {
     this.isAddButtonDisabled = !this.isAddButtonDisabled;
   }
 
+  onPokemonNameInputChange(event: Event) {
+    //console.log(event);
+
+    const inputElt = event.target as HTMLInputElement;
+    console.log(inputElt.value);
+
+  }
+
 }

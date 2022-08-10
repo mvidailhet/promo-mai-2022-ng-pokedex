@@ -1,3 +1,8 @@
+<div class="mb-3">
+  <label for="pokemonNameInput" class="form-label">Pokemon name</label>
+  <input type="text" (input)="onPokemonNameInputChange($event)" class="form-control" id="pokemonNameInput" placeholder="bulbizarre">
+</div>
+
 <button type="button" (click)="onAddPokemonClick()" [disabled]="isAddButtonDisabled" class="btn btn-primary">
   Add pokemon
 </button>
