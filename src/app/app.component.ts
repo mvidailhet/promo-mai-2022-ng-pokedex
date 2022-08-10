@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'promo-mai-2022-ng-pokedex-temp';
+  title = 'coucou';
+
+  onClick() {
+    this.title = "toto";
+  }
 }
