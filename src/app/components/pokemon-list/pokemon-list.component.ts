@@ -17,12 +17,19 @@ export class PokemonListComponent implements OnInit {
   }
 
   onAddPokemonClick() {
+
+    if (!this.pokemonInputValue) return;
+
     this.pokemonInputValue = '';
     this.wasPokemonAdded = true;
+
+
 
     setTimeout(() => {
       this.wasPokemonAdded = false;
     }, 3000);
+
+
   }
 
   onPokemonNameInputChange(event: Event) {
