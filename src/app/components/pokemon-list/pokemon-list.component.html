@@ -1,6 +1,15 @@
-<button [disabled]="isAddButtonDisabled">Add pokemon</button>
+<button type="button" [disabled]="isAddButtonDisabled" class="btn btn-primary">
+  Add pokemon
+</button>
 
-<app-pokemon-item class="pokemon-item"></app-pokemon-item>
-<app-pokemon-item class="pokemon-item"></app-pokemon-item>
-<app-pokemon-item class="pokemon-item"></app-pokemon-item>
-<app-pokemon-item class="pokemon-item"></app-pokemon-item>
+<ul class="list-group">
+  <li class="list-group-item">
+    <app-pokemon-item class="pokemon-item"></app-pokemon-item>
+  </li>
+  <li class="list-group-item">
+    <app-pokemon-item class="pokemon-item"></app-pokemon-item>
+  </li>
+  <li class="list-group-item">
+    <app-pokemon-item class="pokemon-item"></app-pokemon-item>
+  </li>
+</ul>
