@@ -8,13 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class PokemonItemComponent implements OnInit {
   level = Math.round(Math.random() * 100);
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
   }
 
   generateColor() {
-    console.log('generating color');
     return this.level > 50 ? '#00dd00' : '#882222';
   }
 

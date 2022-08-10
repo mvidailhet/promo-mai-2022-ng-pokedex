@@ -18,13 +18,8 @@
 <div>{{ pokemonInputValue }}</div>
 
 <ul class="list-group">
-  <li class="list-group-item">
-    <app-pokemon-item class="pokemon-item"></app-pokemon-item>
-  </li>
-  <li class="list-group-item">
-    <app-pokemon-item class="pokemon-item"></app-pokemon-item>
-  </li>
-  <li class="list-group-item">
+  <li *ngFor="let pokemon of pokemons" class="list-group-item">
+    {{ pokemon }}
     <app-pokemon-item class="pokemon-item"></app-pokemon-item>
   </li>
 </ul>

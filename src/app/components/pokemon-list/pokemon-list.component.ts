@@ -6,15 +6,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pokemon-list.component.scss']
 })
 export class PokemonListComponent implements OnInit {
-  //pokemonName: string | undefined;
   pokemonInputValue: string | undefined;
   wasPokemonAdded = false;
   wasBadWordWritten = false;
 
-  constructor() { }
+  pokemons: string[] = [];
+
+  constructor() {
+    this.getPokemons();
+  }
 
   ngOnInit(): void {
 
+  }
+
+  getPokemons() {
+    const pokemonsString = localStorage.getItem('pokemons');
+    if (pokemonsString) {
+      this.pokemons = JSON.parse(pokemonsString);
+    }
+  }
+
+  savePokemons(pokemons: string[]) {
+    localStorage.setItem('pokemons', JSON.stringify(pokemons));
   }
 
   onAddPokemonClick() {
@@ -31,6 +45,10 @@ export class PokemonListComponent implements OnInit {
 
       return;
     }
+
+    this.pokemons.push(this.pokemonInputValue);
+
+    this.savePokemons(this.pokemons);
 
     this.pokemonInputValue = '';
     this.wasPokemonAdded = true;
