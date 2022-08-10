@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pokemon-list.component.scss']
 })
 export class PokemonListComponent implements OnInit {
-  isAddButtonDisabled = false;
+  //pokemonName: string | undefined;
+  pokemonInputValue: string | undefined;
 
   constructor() { }
 
@@ -15,14 +16,12 @@ export class PokemonListComponent implements OnInit {
   }
 
   onAddPokemonClick() {
-    this.isAddButtonDisabled = !this.isAddButtonDisabled;
+    this.pokemonInputValue = '';
   }
 
   onPokemonNameInputChange(event: Event) {
-    //console.log(event);
-
-    const inputElt = event.target as HTMLInputElement;
-    console.log(inputElt.value);
+    //const inputElt = event.target as HTMLInputElement;
+    //this.pokemonName = inputElt.value;
 
   }
 

@@ -1,11 +1,12 @@
-<div class="mb-3">
+<div class="py-3">
   <label for="pokemonNameInput" class="form-label">Pokemon name</label>
-  <input type="text" (input)="onPokemonNameInputChange($event)" class="form-control" id="pokemonNameInput" placeholder="bulbizarre">
+  <input type="text" [(ngModel)]="pokemonInputValue" (input)="onPokemonNameInputChange($event)" class="form-control" id="pokemonNameInput" placeholder="bulbizarre">
+  <button type="button" (click)="onAddPokemonClick()" class="btn btn-primary">
+    Add pokemon
+  </button>
 </div>
 
-<button type="button" (click)="onAddPokemonClick()" [disabled]="isAddButtonDisabled" class="btn btn-primary">
-  Add pokemon
-</button>
+<div>{{ pokemonInputValue }}</div>
 
 <ul class="list-group">
   <li class="list-group-item">
