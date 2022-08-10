@@ -1,1 +1,6 @@
-Pokemon de niveau: {{ level }}
+Pokemon de niveau:
+<span
+  class="badge rounded-pill"
+  [ngStyle]="{ backgroundColor: generateColor() }"
+  [ngClass]="{ 'is-red': level > 50 }"
+  >{{ level }}</span>

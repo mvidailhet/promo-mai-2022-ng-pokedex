@@ -6,11 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pokemon-item.component.scss']
 })
 export class PokemonItemComponent implements OnInit {
-  level = 5;
+  level = Math.round(Math.random() * 100);
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  generateColor() {
+    console.log('generating color');
+    return this.level > 50 ? '#00dd00' : '#882222';
   }
 
 }
