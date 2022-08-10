@@ -12,6 +12,8 @@ export class PokemonListComponent implements OnInit {
 
   pokemons: string[] = [];
 
+  matchingPokemons: string[] = [];
+
   constructor() {
     this.getPokemons();
   }
@@ -46,25 +48,35 @@ export class PokemonListComponent implements OnInit {
       return;
     }
 
-    this.pokemons.push(this.pokemonInputValue);
+    this.addPokemonToPokemons(this.pokemonInputValue);
+  }
 
+  onPokemonNameInputChange(event: Event) {
+    this.matchingPokemons = [];
+    if (!this.pokemonInputValue) return;
+    this.matchingPokemons = this.getMatchingPokemons(this.pokemonInputValue, this.pokedex);
+  }
+
+  pokedex = ['bulbizarre', 'herbizarre', 'florizarre', 'carapuce'];
+
+  getMatchingPokemons(inputText: string, pokedex: string[]): string[] {
+    return pokedex.filter(pokemon => pokemon.includes(inputText));
+  }
+
+  addPokemonToPokemons(pokemon: string) {
+    this.pokemons.push(pokemon);
     this.savePokemons(this.pokemons);
-
     this.pokemonInputValue = '';
     this.wasPokemonAdded = true;
-
+    this.matchingPokemons = [];
 
     setTimeout(() => {
       this.wasPokemonAdded = false;
     }, 3000);
-
-
   }
 
-  onPokemonNameInputChange(event: Event) {
-    //const inputElt = event.target as HTMLInputElement;
-    //this.pokemonName = inputElt.value;
-
+  matchingPokemonClick(matchingPokemon: string) {
+    this.addPokemonToPokemons(matchingPokemon);
   }
 
 }

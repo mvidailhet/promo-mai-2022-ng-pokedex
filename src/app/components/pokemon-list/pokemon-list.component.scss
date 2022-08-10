@@ -1,0 +1,19 @@
+.input-and-autocomplete {
+  position: relative;
+
+  .autocomplete {
+    position: absolute;
+    top: 38px;
+    width: 100%;
+    z-index: 1;
+
+    li {
+      background-color: lightgrey;
+
+      &:hover {
+        background-color: grey;
+        cursor: pointer;
+      }
+    }
+  }
+}
