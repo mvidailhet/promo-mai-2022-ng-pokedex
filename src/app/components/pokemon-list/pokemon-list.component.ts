@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class PokemonListComponent implements OnInit {
   //pokemonName: string | undefined;
   pokemonInputValue: string | undefined;
+  wasPokemonAdded = false;
 
   constructor() { }
 
@@ -17,6 +18,11 @@ export class PokemonListComponent implements OnInit {
 
   onAddPokemonClick() {
     this.pokemonInputValue = '';
+    this.wasPokemonAdded = true;
+
+    setTimeout(() => {
+      this.wasPokemonAdded = false;
+    }, 3000);
   }
 
   onPokemonNameInputChange(event: Event) {

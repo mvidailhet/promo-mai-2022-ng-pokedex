@@ -4,6 +4,13 @@
   <button type="button" (click)="onAddPokemonClick()" class="btn btn-primary">
     Add pokemon
   </button>
+
+  <div *ngIf="wasPokemonAdded; else noPokemon">Pokemon was added</div>
+
+  <ng-template #noPokemon>
+    No Pokemon was added yet
+  </ng-template>
+
 </div>
 
 <div>{{ pokemonInputValue }}</div>
