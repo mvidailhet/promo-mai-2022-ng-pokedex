@@ -6,16 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pokemon-list.component.scss']
 })
 export class PokemonListComponent implements OnInit {
-  isAddButtonDisabled = true;
+  isAddButtonDisabled = false;
 
   constructor() { }
 
   ngOnInit(): void {
 
-    setTimeout(() => {
-      this.isAddButtonDisabled = false;
-    }, 2000);
+  }
 
+  onAddPokemonClick() {
+    this.isAddButtonDisabled = !this.isAddButtonDisabled;
   }
 
 }
