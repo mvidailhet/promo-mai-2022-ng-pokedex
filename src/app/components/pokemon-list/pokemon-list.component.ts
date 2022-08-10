@@ -9,6 +9,7 @@ export class PokemonListComponent implements OnInit {
   //pokemonName: string | undefined;
   pokemonInputValue: string | undefined;
   wasPokemonAdded = false;
+  wasBadWordWritten = false;
 
   constructor() { }
 
@@ -20,9 +21,19 @@ export class PokemonListComponent implements OnInit {
 
     if (!this.pokemonInputValue) return;
 
+    const badWords = ['con', 'debile'];
+    if (badWords.includes(this.pokemonInputValue)) {
+      this.wasBadWordWritten = true;
+
+      setTimeout(() => {
+        this.wasBadWordWritten = false;
+      }, 3000);
+
+      return;
+    }
+
     this.pokemonInputValue = '';
     this.wasPokemonAdded = true;
-
 
 
     setTimeout(() => {
