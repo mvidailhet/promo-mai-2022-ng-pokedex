@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Pokemon } from 'src/app/interfaces/pokemon';
+import { Utils } from 'src/app/utils';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -10,7 +12,7 @@ export class PokemonListComponent implements OnInit {
   wasPokemonAdded = false;
   wasBadWordWritten = false;
 
-  pokemons: string[] = [];
+  pokemons: Pokemon[] = [];
 
   matchingPokemons: string[] = [];
 
@@ -29,7 +31,7 @@ export class PokemonListComponent implements OnInit {
     }
   }
 
-  savePokemons(pokemons: string[]) {
+  savePokemons(pokemons: Pokemon[]) {
     localStorage.setItem('pokemons', JSON.stringify(pokemons));
   }
 
@@ -63,7 +65,13 @@ export class PokemonListComponent implements OnInit {
     return pokedex.filter(pokemon => pokemon.includes(inputText));
   }
 
-  addPokemonToPokemons(pokemon: string) {
+  addPokemonToPokemons(pokemonName: string) {
+
+    const pokemon: Pokemon = {
+      name: pokemonName,
+      level: Utils.random(1, 100),
+    }
+
     this.pokemons.push(pokemon);
     this.savePokemons(this.pokemons);
     this.pokemonInputValue = '';

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Utils } from 'src/app/utils';
+import { Pokemon } from 'src/app/interfaces/pokemon';
+
 
 @Component({
   selector: 'app-pokemon-item',
@@ -7,8 +8,7 @@ import { Utils } from 'src/app/utils';
   styleUrls: ['./pokemon-item.component.scss']
 })
 export class PokemonItemComponent implements OnInit {
-  @Input() name: string | undefined;
-  level = Utils.random(1, 100);
+  @Input() pokemon: Pokemon | undefined;
 
   constructor() {
 
@@ -18,7 +18,8 @@ export class PokemonItemComponent implements OnInit {
   }
 
   generateColor() {
-    return this.level > 50 ? '#00dd00' : '#882222';
+    if (!this.pokemon) return '#FFF';
+    return this.pokemon?.level > 50 ? '#00dd00' : '#882222';
   }
 
 }

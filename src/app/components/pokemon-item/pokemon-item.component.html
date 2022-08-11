@@ -1,6 +1,7 @@
-{{ name }} niveau:
+{{ pokemon?.name }} niveau:
 <span
+  *ngIf="pokemon"
   class="badge rounded-pill"
   [ngStyle]="{ backgroundColor: generateColor() }"
-  [ngClass]="{ 'is-red': level > 50 }"
-  >{{ level }}</span>
+  [ngClass]="{ 'is-red': pokemon.level > 50 }"
+  >{{ pokemon.level }}</span>
