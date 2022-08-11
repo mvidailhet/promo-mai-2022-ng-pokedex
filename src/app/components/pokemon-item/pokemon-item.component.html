@@ -4,4 +4,9 @@
   class="badge rounded-pill"
   [ngStyle]="{ backgroundColor: generateColor() }"
   [ngClass]="{ 'is-red': pokemon.level > 50 }"
-  >{{ pokemon.level }}</span>
+  >{{ pokemon.level }}</span
+>
+
+<button type="button" (click)="onDeleteClick()" class="btn btn-primary">
+  Delete
+</button>

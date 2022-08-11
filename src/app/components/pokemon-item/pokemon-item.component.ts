@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Pokemon } from 'src/app/interfaces/pokemon';
 
 
@@ -9,6 +9,7 @@ import { Pokemon } from 'src/app/interfaces/pokemon';
 })
 export class PokemonItemComponent implements OnInit {
   @Input() pokemon: Pokemon | undefined;
+  @Output() onDelete = new EventEmitter();
 
   constructor() {
 
@@ -20,6 +21,10 @@ export class PokemonItemComponent implements OnInit {
   generateColor() {
     if (!this.pokemon) return '#FFF';
     return this.pokemon?.level > 50 ? '#00dd00' : '#882222';
+  }
+
+  onDeleteClick() {
+    this.onDelete.emit();
   }
 
 }

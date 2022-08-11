@@ -27,7 +27,7 @@
 <div>{{ pokemonInputValue }}</div>
 
 <ul class="list-group">
-  <li *ngFor="let pokemon of pokemons" class="list-group-item">
-    <app-pokemon-item [pokemon]="pokemon" class="pokemon-item"></app-pokemon-item>
+  <li *ngFor="let pokemon of pokemons; let i = index" class="list-group-item">
+    <app-pokemon-item [pokemon]="pokemon" (onDelete)="onPokemonDelete(i)" class="pokemon-item"></app-pokemon-item>
   </li>
 </ul>

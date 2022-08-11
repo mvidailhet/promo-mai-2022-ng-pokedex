@@ -87,4 +87,8 @@ export class PokemonListComponent implements OnInit {
     this.addPokemonToPokemons(matchingPokemon);
   }
 
+  onPokemonDelete(indexToDelete: number) {
+    this.pokemons.splice(indexToDelete, 1);
+  }
+
 }
