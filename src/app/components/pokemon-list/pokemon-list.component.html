@@ -1,7 +1,7 @@
 <div class="py-3">
   <label for="pokemonNameInput" class="form-label">Pokemon name</label>
   <div class="input-and-autocomplete">
-    <input type="text" [(ngModel)]="pokemonInputValue" (input)="onPokemonNameInputChange($event)" class="form-control" id="pokemonNameInput" placeholder="bulbizarre">
+    <input type="text" [(ngModel)]="pokemonInputValue" (input)="onPokemonNameInputChange()" class="form-control" id="pokemonNameInput" placeholder="bulbizarre">
     <ul class="list-group autocomplete">
       <li (click)="matchingPokemonClick(matchingPokemon)" *ngFor="let matchingPokemon of matchingPokemons" class="list-group-item">
         {{ matchingPokemon }}

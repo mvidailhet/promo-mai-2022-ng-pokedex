@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/interfaces/pokemon';
 import { LoggingService } from 'src/app/services/logging.service';
+import { PokemonService } from 'src/app/services/pokemon.service';
 import { Utils } from 'src/app/utils';
 
 @Component({
@@ -13,27 +14,18 @@ export class PokemonListComponent implements OnInit {
   wasPokemonAdded = false;
   wasBadWordWritten = false;
 
-  pokemons: Pokemon[] = [];
+  pokemons: Pokemon[] = this.pokemonService.pokemons;
 
   matchingPokemons: string[] = [];
 
-  constructor(private loggingService: LoggingService) {
+  constructor(
+    private loggingService: LoggingService,
+    private pokemonService: PokemonService
+  ) {
     this.loggingService.log('created pokemon list !');
-    this.getPokemons();
   }
 
   ngOnInit(): void {}
-
-  getPokemons() {
-    const pokemonsString = localStorage.getItem('pokemons');
-    if (pokemonsString) {
-      this.pokemons = JSON.parse(pokemonsString);
-    }
-  }
-
-  savePokemons(pokemons: Pokemon[]) {
-    localStorage.setItem('pokemons', JSON.stringify(pokemons));
-  }
 
   onAddPokemonClick() {
     if (!this.pokemonInputValue) return;
@@ -52,7 +44,7 @@ export class PokemonListComponent implements OnInit {
     this.addPokemonToPokemons(this.pokemonInputValue);
   }
 
-  onPokemonNameInputChange(event: Event) {
+  onPokemonNameInputChange() {
     this.matchingPokemons = [];
     if (!this.pokemonInputValue) return;
     this.matchingPokemons = this.getMatchingPokemons(
@@ -68,13 +60,8 @@ export class PokemonListComponent implements OnInit {
   }
 
   addPokemonToPokemons(pokemonName: string) {
-    const pokemon: Pokemon = {
-      name: pokemonName,
-      level: Utils.random(1, 100),
-    };
+    this.pokemonService.addPokemon(pokemonName);
 
-    this.pokemons.push(pokemon);
-    this.savePokemons(this.pokemons);
     this.pokemonInputValue = '';
     this.wasPokemonAdded = true;
     this.matchingPokemons = [];
@@ -89,6 +76,6 @@ export class PokemonListComponent implements OnInit {
   }
 
   onPokemonDelete(indexToDelete: number) {
-    this.pokemons.splice(indexToDelete, 1);
+    this.pokemonService.deletePokemon(indexToDelete);
   }
 }
