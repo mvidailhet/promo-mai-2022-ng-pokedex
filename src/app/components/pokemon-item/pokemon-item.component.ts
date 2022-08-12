@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Pokemon } from 'src/app/interfaces/pokemon';
+import { LoggingService } from 'src/app/services/logging.service';
 
 
 @Component({
@@ -11,8 +12,8 @@ export class PokemonItemComponent implements OnInit {
   @Input() pokemon: Pokemon | undefined;
   @Output() onDelete = new EventEmitter();
 
-  constructor() {
-
+  constructor(private loggingService: LoggingService) {
+    this.loggingService.log('created pokemon item !');
   }
 
   ngOnInit(): void {
