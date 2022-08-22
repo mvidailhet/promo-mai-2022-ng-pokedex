@@ -14,6 +14,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { FilterPokemonLevelPipe } from './pipes/filter-pokemon-level.pipe';
+import { PokedexComponent } from './pages/pokedex/pokedex.component';
 
 registerLocaleData(localeFr);
 
@@ -25,7 +26,8 @@ registerLocaleData(localeFr);
     HomeComponent,
     PokemonComponent,
     ShortenPipe,
-    FilterPokemonLevelPipe
+    FilterPokemonLevelPipe,
+    PokedexComponent
   ],
   imports: [
     BrowserModule,
