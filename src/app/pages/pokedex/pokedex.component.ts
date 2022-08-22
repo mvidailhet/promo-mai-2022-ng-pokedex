@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pokedex.component.scss']
 })
 export class PokedexComponent implements OnInit {
+  pokemon: any;
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
+    this.getPokemon();
+  }
+
+  getPokemon() {
+    this.httpClient.get('https://pokeapi.co/api/v2/pokemon/1')
+    .subscribe((res: any) => {
+      this.pokemon = res;
+      console.log(this.pokemon);
+    });
   }
 
 }

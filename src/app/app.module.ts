@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { PokemonComponent } from './pages/pokemon/pokemon.component';
 import { registerLocaleData } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import localeFr from '@angular/common/locales/fr';
 import { ShortenPipe } from './pipes/shorten.pipe';
@@ -33,7 +34,8 @@ registerLocaleData(localeFr);
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' },],
   bootstrap: [AppComponent]
