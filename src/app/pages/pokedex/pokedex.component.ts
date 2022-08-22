@@ -1,6 +1,7 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
+import { PokemonsResult, SimplePokemon } from 'src/app/models/api-results/pokemons';
 
 @Component({
   selector: 'app-pokedex',
@@ -8,24 +9,25 @@ import { lastValueFrom } from 'rxjs';
   styleUrls: ['./pokedex.component.scss'],
 })
 export class PokedexComponent implements OnInit {
-  pokemon: any;
+  pokemons?: SimplePokemon[];
 
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    this.getPokemonPromise().then((res: any) => {
-      this.pokemon = res;
-      console.log(this.pokemon);
-    }, (error: HttpErrorResponse) => {
-      console.error(error);
+    this.initPokemons();
+  }
+
+  initPokemons() {
+    this.getPokemons().subscribe((res: PokemonsResult) => {
+      this.pokemons = res.results;
     });
   }
 
-  getPokemon() {
-    return this.httpClient.get('https://pokeapi.co/api/v2/pokemo/1');
+  getPokemons() {
+    return this.httpClient.get<PokemonsResult>('https://pokeapi.co/api/v2/pokemon?limit=150');
   }
 
-  getPokemonPromise() {
-    return lastValueFrom(this.getPokemon());
+  getPokemonsPromise() {
+    return lastValueFrom(this.getPokemons());
   }
 }

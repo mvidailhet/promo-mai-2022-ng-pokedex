@@ -1,1 +1,5 @@
-<p>pokedex works!</p>
+<ul class="list-group" *ngIf="pokemons">
+  <li *ngFor="let pokemon of pokemons" class="list-group-item">
+    {{ pokemon.name }}
+  </li>
+</ul>
