@@ -12,6 +12,7 @@ import { PokemonComponent } from './pages/pokemon/pokemon.component';
 import { registerLocaleData } from '@angular/common';
 
 import localeFr from '@angular/common/locales/fr';
+import { ShortenPipe } from './pipes/shorten.pipe';
 
 registerLocaleData(localeFr);
 
@@ -21,7 +22,8 @@ registerLocaleData(localeFr);
     PokemonItemComponent,
     PokemonListComponent,
     HomeComponent,
-    PokemonComponent
+    PokemonComponent,
+    ShortenPipe
   ],
   imports: [
     BrowserModule,
