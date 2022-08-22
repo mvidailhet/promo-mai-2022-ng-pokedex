@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Pokemon } from 'src/app/interfaces/pokemon';
 import { LoggingService } from 'src/app/services/logging.service';
 import { PokemonService } from 'src/app/services/pokemon.service';
@@ -20,7 +21,8 @@ export class PokemonListComponent implements OnInit {
 
   constructor(
     private loggingService: LoggingService,
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private router: Router
   ) {
     this.loggingService.log('created pokemon list !');
   }
@@ -77,5 +79,9 @@ export class PokemonListComponent implements OnInit {
 
   onPokemonDelete(indexToDelete: number) {
     this.pokemonService.deletePokemon(indexToDelete);
+  }
+
+  goToPokemonPage(index: number) {
+    this.router.navigate(['/pokemon', index]);
   }
 }
