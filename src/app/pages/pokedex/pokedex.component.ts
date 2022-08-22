@@ -14,13 +14,19 @@ export class PokedexComponent implements OnInit {
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    this.initPokemons();
+    //this.initPokemons();
+    this.initPokemonsPromise();
   }
 
   initPokemons() {
     this.getPokemons().subscribe((res: PokemonsResult) => {
       this.pokemons = res.results;
     });
+  }
+
+  async initPokemonsPromise() {
+    const pokemonsResult: PokemonsResult = await this.getPokemonsPromise();
+    this.pokemons = pokemonsResult.results;
   }
 
   getPokemons() {
