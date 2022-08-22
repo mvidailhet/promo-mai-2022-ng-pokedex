@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-pokedex',
@@ -12,13 +13,19 @@ export class PokedexComponent implements OnInit {
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    this.getPokemon().subscribe((res: any) => {
+    this.getPokemonPromise().then((res: any) => {
       this.pokemon = res;
       console.log(this.pokemon);
+    }, (error: HttpErrorResponse) => {
+      console.error(error);
     });
   }
 
   getPokemon() {
-    return this.httpClient.get('https://pokeapi.co/api/v2/pokemon/1');
+    return this.httpClient.get('https://pokeapi.co/api/v2/pokemo/1');
+  }
+
+  getPokemonPromise() {
+    return lastValueFrom(this.getPokemon());
   }
 }
