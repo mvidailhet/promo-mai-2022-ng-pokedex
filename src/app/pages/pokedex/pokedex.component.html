@@ -2,5 +2,6 @@
   <li *ngFor="let pokemon of pokemons" class="list-group-item">
     {{ pokemon.name }}
     <img [src]="pokemon.details?.sprites?.front_default">
+    <img [src]="'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/' + pokemon.idZeroedString + '.png'">
   </li>
 </ul>

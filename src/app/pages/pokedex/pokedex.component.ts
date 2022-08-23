@@ -21,13 +21,34 @@ export class PokedexComponent implements OnInit {
     this.initPokemons();
   }
 
+  getPokemonIdFromApiUrl(apiUrl: string) {
+    const splitSlashUrl = apiUrl.split('/');
+    // Le dernier element est '' à cause du '/' de fin
+    return parseInt(splitSlashUrl[splitSlashUrl.length - 2]);
+  }
+
+  getPokemonIdZeroedString(id: number) {
+    let res = '';
+    if (id < 100) res += '0';
+    if (id < 10) res += '0';
+    res += id;
+    return res;
+  }
+
   initPokemons() {
     this.apiService
       .getPokemons()
       .subscribe(async (pokemonsResult: PokemonsResult) => {
         this.pokemons = pokemonsResult.results;
-
         this.pokemons.forEach(async (pokemon: SimplePokemon, index) => {
+          const pokemonId = this.getPokemonIdFromApiUrl(this.pokemons[index].url);
+
+          this.pokemons[index] = {
+            ...this.pokemons[index],
+            id: pokemonId,
+            idZeroedString: this.getPokemonIdZeroedString(pokemonId),
+          };
+
           const pokemonResponse: PokemonResult =
             await this.apiService.getPokemonfromUrlPromise(pokemon.url);
           this.pokemons[index] = {

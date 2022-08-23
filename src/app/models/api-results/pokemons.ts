@@ -8,4 +8,6 @@ export interface PokemonsResult {
 export interface SimplePokemon {
   name: string;
   url: string;
+  id?: number;
+  idZeroedString?: string;
 }
