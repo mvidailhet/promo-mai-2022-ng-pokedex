@@ -23,6 +23,10 @@ export class ApiService {
     return this.httpClient.get<PokemonResult>(url).pipe(delay(Utils.random(1, 3000)));
   }
 
+  getPokemonfromUrlPromise(url: string) {
+    return lastValueFrom(this.httpClient.get<PokemonResult>(url));
+  }
+
   getPokemonsPromise() {
     return lastValueFrom(this.getPokemons());
   }

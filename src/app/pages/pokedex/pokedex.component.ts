@@ -27,7 +27,7 @@ export class PokedexComponent implements OnInit {
 
       this.pokemons.forEach((pokemon: SimplePokemon, index) => {
 
-        this.apiService.getPokemonfromUrl(pokemon.url).subscribe((pokemonResponse: PokemonResult) => {
+        this.apiService.getPokemonfromUrlPromise(pokemon.url).then((pokemonResponse: PokemonResult) => {
           this.pokemons[index] = { ...this.pokemons[index], details: pokemonResponse };
         });
 
