@@ -22,16 +22,12 @@ export class PokedexComponent implements OnInit {
   }
 
   initPokemons() {
-    this.apiService.getPokemons().subscribe((pokemonsResult: PokemonsResult) => {
+    this.apiService.getPokemons().subscribe(async (pokemonsResult: PokemonsResult) => {
       this.pokemons = pokemonsResult.results;
-
-      this.pokemons.forEach((pokemon: SimplePokemon, index) => {
-
-        this.apiService.getPokemonfromUrlPromise(pokemon.url).then((pokemonResponse: PokemonResult) => {
-          this.pokemons[index] = { ...this.pokemons[index], details: pokemonResponse };
-        });
-
-      })
+      for (let i = 0; i < this.pokemons.length; i++) {
+        const pokemonResponse: PokemonResult = await this.apiService.getPokemonfromUrlPromise(this.pokemons[i].url);
+        this.pokemons[i] = { ...this.pokemons[i], details: pokemonResponse };
+      }
     });
   }
 

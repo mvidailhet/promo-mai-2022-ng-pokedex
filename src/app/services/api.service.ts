@@ -24,7 +24,7 @@ export class ApiService {
   }
 
   getPokemonfromUrlPromise(url: string) {
-    return lastValueFrom(this.httpClient.get<PokemonResult>(url));
+    return lastValueFrom(this.getPokemonfromUrl(url));
   }
 
   getPokemonsPromise() {
