@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { PokemonResult } from 'src/app/models/api-results/pokemon';
 import {
   PokemonsResult,
   SimplePokemon,
@@ -17,17 +18,20 @@ export class PokedexComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    //this.initPokemons();
-    this.initPokemonsPromise();
+    this.initPokemons();
   }
 
   initPokemons() {
-    this.getOnlyPokemons().subscribe((pokemons: SimplePokemon[]) => {
-      this.pokemons = pokemons;
+    this.apiService.getPokemons().subscribe((pokemonsResult: PokemonsResult) => {
+      this.pokemons = pokemonsResult.results;
+
+      this.apiService.getPokemonfromUrl(this.pokemons[0].url).subscribe((response: PokemonResult) => {
+        console.log(response);
+      });
     });
   }
 
-  async initPokemonsPromise() {
+/*   async initPokemonsPromise() {
     const pokemonsResult: PokemonsResult =
       await this.apiService.getPokemonsPromise();
     this.pokemons = pokemonsResult.results;
@@ -37,5 +41,5 @@ export class PokedexComponent implements OnInit {
     return this.apiService
       .getPokemons()
       .pipe(map((pokemonsResult: PokemonsResult) => pokemonsResult.results));
-  }
+  } */
 }
