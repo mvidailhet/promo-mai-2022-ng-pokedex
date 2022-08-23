@@ -1,7 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { delay, lastValueFrom, map, Observable } from 'rxjs';
-import { PokemonsResult, SimplePokemon } from 'src/app/models/api-results/pokemons';
+import { map, Observable } from 'rxjs';
+import {
+  PokemonsResult,
+  SimplePokemon,
+} from 'src/app/models/api-results/pokemons';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-pokedex',
@@ -11,7 +14,7 @@ import { PokemonsResult, SimplePokemon } from 'src/app/models/api-results/pokemo
 export class PokedexComponent implements OnInit {
   pokemons?: SimplePokemon[];
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     //this.initPokemons();
@@ -19,32 +22,20 @@ export class PokedexComponent implements OnInit {
   }
 
   initPokemons() {
-/*     this.getPokemons().subscribe((res: PokemonsResult) => {
-      this.pokemons = res.results;
-    }); */
-
     this.getOnlyPokemons().subscribe((pokemons: SimplePokemon[]) => {
       this.pokemons = pokemons;
     });
   }
 
   async initPokemonsPromise() {
-    const pokemonsResult: PokemonsResult = await this.getPokemonsPromise();
+    const pokemonsResult: PokemonsResult =
+      await this.apiService.getPokemonsPromise();
     this.pokemons = pokemonsResult.results;
   }
 
   getOnlyPokemons(): Observable<SimplePokemon[]> {
-    return this.getPokemons().pipe(
-      delay(1000),
-      map((pokemonsResult: PokemonsResult) => pokemonsResult.results),
-    );
-  }
-
-  getPokemons() {
-    return this.httpClient.get<PokemonsResult>('https://pokeapi.co/api/v2/pokemon?limit=150');
-  }
-
-  getPokemonsPromise() {
-    return lastValueFrom(this.getPokemons());
+    return this.apiService
+      .getPokemons()
+      .pipe(map((pokemonsResult: PokemonsResult) => pokemonsResult.results));
   }
 }
