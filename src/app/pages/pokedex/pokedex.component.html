@@ -1,5 +1,6 @@
 <ul class="list-group" *ngIf="pokemons">
   <li *ngFor="let pokemon of pokemons" class="list-group-item">
     {{ pokemon.name }}
+    <img [src]="pokemon.details?.sprites?.front_default">
   </li>
 </ul>

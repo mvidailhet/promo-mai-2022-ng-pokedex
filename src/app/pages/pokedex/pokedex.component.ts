@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { PokemonResult } from 'src/app/models/api-results/pokemon';
+import { Pokemon, PokemonResult } from 'src/app/models/api-results/pokemon';
 import {
   PokemonsResult,
   SimplePokemon,
@@ -13,7 +13,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./pokedex.component.scss'],
 })
 export class PokedexComponent implements OnInit {
-  pokemons?: SimplePokemon[];
+  pokemons: Pokemon[] = [];
 
   constructor(private apiService: ApiService) {}
 
@@ -25,13 +25,17 @@ export class PokedexComponent implements OnInit {
     this.apiService.getPokemons().subscribe((pokemonsResult: PokemonsResult) => {
       this.pokemons = pokemonsResult.results;
 
-      this.apiService.getPokemonfromUrl(this.pokemons[0].url).subscribe((response: PokemonResult) => {
-        console.log(response);
-      });
+      this.pokemons.forEach((pokemon: SimplePokemon, index) => {
+
+        this.apiService.getPokemonfromUrl(pokemon.url).subscribe((pokemonResponse: PokemonResult) => {
+          this.pokemons[index] = { ...this.pokemons[index], details: pokemonResponse };
+        });
+
+      })
     });
   }
 
-/*   async initPokemonsPromise() {
+  async initPokemonsPromise() {
     const pokemonsResult: PokemonsResult =
       await this.apiService.getPokemonsPromise();
     this.pokemons = pokemonsResult.results;
@@ -41,5 +45,5 @@ export class PokedexComponent implements OnInit {
     return this.apiService
       .getPokemons()
       .pipe(map((pokemonsResult: PokemonsResult) => pokemonsResult.results));
-  } */
+  }
 }

@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { delay, lastValueFrom } from 'rxjs';
 import { PokemonResult } from '../models/api-results/pokemon';
 import { PokemonsResult } from '../models/api-results/pokemons';
+import { Utils } from '../utils';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ApiService {
   }
 
   getPokemonfromUrl(url: string) {
-    return this.httpClient.get<PokemonResult>(url);
+    return this.httpClient.get<PokemonResult>(url).pipe(delay(Utils.random(1, 3000)));
   }
 
   getPokemonsPromise() {
